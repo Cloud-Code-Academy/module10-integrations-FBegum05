@@ -116,9 +116,12 @@ public with sharing class DummyJSONCalloutTest {
 	static void testCreateContactFromJson() {
 		// JSON string that represents the response data
 		String jsonResponse = DummyJSONCalloutMockGenerator.DUMMY_JSON_USER_PAYLOAD;
+        Map<String, Object> jsonMap = (Map<String, Object>)JSON.deserializeUntyped(jsonResponse);
+             
+
 
 		// Call the method
-		Contact cont = DummyJSONCallout.createContactFromJson(jsonResponse);
+		Contact cont = DummyJSONCallout.createContactFromJson(jsonMap);
 
 		// Assertions to check if the Contact object was populated correctly
 		System.assertEquals('test@example.com', cont.Email, 'Email does not match.');
@@ -129,7 +132,7 @@ public with sharing class DummyJSONCalloutTest {
 		System.assertEquals('12345', cont.MailingPostalCode, 'MailingPostalCode does not match.');
 		System.assertEquals('TS', cont.MailingState, 'MailingState does not match.');
 		System.assertEquals('Testland', cont.MailingCountry, 'MailingCountry does not match.');
-	}
+          	}
 
 	@IsTest
 	static void testContactInsert() {
